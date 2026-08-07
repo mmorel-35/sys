@@ -42,7 +42,7 @@ func TestDeviceFromPathLstatFailure(t *testing.T) {
 	testError := errors.New("test error")
 
 	// Override unix.Lstat to inject error.
-	unixLstat = func(path string, stat *unix.Stat_t) error {
+	unixLstat = func(_ string, _ *unix.Stat_t) error {
 		return testError
 	}
 	defer cleanupTest()
@@ -57,7 +57,7 @@ func TestHostDevicesIoutilReadDirFailure(t *testing.T) {
 	testError := errors.New("test error")
 
 	// Override os.ReadDir to inject error.
-	osReadDir = func(dirname string) ([]fs.DirEntry, error) {
+	osReadDir = func(_ string) ([]fs.DirEntry, error) {
 		return nil, testError
 	}
 	defer cleanupTest()
@@ -73,7 +73,7 @@ func TestHostDevicesIoutilReadDirDeepFailure(t *testing.T) {
 	called := false
 
 	// Override os.ReadDir to inject error after the first call.
-	osReadDir = func(dirname string) ([]fs.DirEntry, error) {
+	osReadDir = func(_ string) ([]fs.DirEntry, error) {
 		if called {
 			return nil, testError
 		}

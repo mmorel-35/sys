@@ -51,16 +51,16 @@ func mkdirAs(path string, mode os.FileMode, uid, gid int, mkAll, onlyNew bool) e
 				paths = append(paths, dirPath)
 			}
 		}
-		if err = os.MkdirAll(path, mode); err != nil {
+		if err := os.MkdirAll(path, mode); err != nil {
 			return err
 		}
-	} else if err = os.Mkdir(path, mode); err != nil {
+	} else if err := os.Mkdir(path, mode); err != nil {
 		return err
 	}
 	// even if it existed, we will chown the requested path + any subpaths that
 	// didn't exist when we called MkdirAll
 	for _, pathComponent := range paths {
-		if err = setPermissions(pathComponent, mode, uid, gid, nil); err != nil {
+		if err := setPermissions(pathComponent, mode, uid, gid, nil); err != nil {
 			return err
 		}
 	}
@@ -137,7 +137,7 @@ func lookupSubRangesFile(path string, usr User) ([]IDMap, error) {
 			ParentID: idrange.SubID,
 			Count:    idrange.Count,
 		})
-		containerID = containerID + idrange.Count
+		containerID += idrange.Count
 	}
 	return idMap, nil
 }

@@ -212,7 +212,7 @@ func TestDispatch(t *testing.T) {
 	}{
 		{
 			name: "not-registered",
-			ctx: func(t *testing.T) context.Context {
+			ctx: func(_ *testing.T) context.Context {
 				return context.Background()
 			},
 			check: func(t *testing.T, ok bool, err error) {

@@ -60,7 +60,7 @@ var testMounts = []testMount{
 	{
 		desc:       "non-existent path",
 		isNotExist: true,
-		prepare: func(t *testing.T) string {
+		prepare: func(_ *testing.T) string {
 			return "/non/existent/path"
 		},
 	},
@@ -385,9 +385,7 @@ func TestMountedBy(t *testing.T) {
 						t.Errorf("%s: expected false on error", name)
 					}
 				} else if mounted != tc.isMount {
-					if tc.isBind && strings.HasSuffix(name, "mountedByStat") {
-						// mountedByStat can not detect bind mounts.
-					} else {
+					if !tc.isBind || !strings.HasSuffix(name, "mountedByStat") {
 						t.Errorf("%s: expected %v, got %v", name, tc.isMount, mounted)
 					}
 				}
