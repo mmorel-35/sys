@@ -84,7 +84,7 @@ func TestNew(t *testing.T) {
 					}
 					writer, err := New(fileName, testMode())
 					if writer == nil {
-						t.Errorf("Writer is nil")
+						t.Error("Writer is nil")
 					}
 					if err != nil {
 						t.Fatalf("Error creating new atomicwriter: %v", err)
@@ -115,7 +115,7 @@ func TestNewInvalid(t *testing.T) {
 		fileName := filepath.Join(tmpDir, "missing-dir", "test.txt")
 		writer, err := New(fileName, testMode())
 		if writer != nil {
-			t.Errorf("Should not have created writer")
+			t.Error("Should not have created writer")
 		}
 		if !errors.Is(err, os.ErrNotExist) {
 			t.Errorf("Should produce a 'not found' error, but got %[1]T (%[1]v)", err)
@@ -131,7 +131,7 @@ func TestNewInvalid(t *testing.T) {
 		fileName := filepath.Join(parentPath, "new-file.txt")
 		writer, err := New(fileName, testMode())
 		if writer != nil {
-			t.Errorf("Should not have created writer")
+			t.Error("Should not have created writer")
 		}
 		// This should match the behavior of os.WriteFile, which returns a [os.PathError] with [syscall.ENOTDIR].
 		if !errors.Is(err, syscall.ENOTDIR) {
@@ -141,7 +141,7 @@ func TestNewInvalid(t *testing.T) {
 	t.Run("empty filename", func(t *testing.T) {
 		writer, err := New("", testMode())
 		if writer != nil {
-			t.Errorf("Should not have created writer")
+			t.Error("Should not have created writer")
 		}
 		if err == nil || err.Error() != "file name is empty" {
 			t.Errorf("Should produce a 'file name is empty' error, but got %[1]T (%[1]v)", err)
@@ -151,7 +151,7 @@ func TestNewInvalid(t *testing.T) {
 		tmpDir := t.TempDir()
 		writer, err := New(tmpDir, testMode())
 		if writer != nil {
-			t.Errorf("Should not have created writer")
+			t.Error("Should not have created writer")
 		}
 		if err == nil || err.Error() != "cannot write to a directory" {
 			t.Errorf("Should produce a 'cannot write to a directory' error, but got %[1]T (%[1]v)", err)
@@ -169,7 +169,7 @@ func TestNewInvalid(t *testing.T) {
 		}
 		writer, err := New(fileName, testMode())
 		if writer != nil {
-			t.Errorf("Should not have created writer")
+			t.Error("Should not have created writer")
 		}
 		if err == nil || err.Error() != "cannot write to a symbolic link directly" {
 			t.Errorf("Should produce a 'cannot write to a symbolic link directly' error, but got %[1]T (%[1]v)", err)
@@ -283,7 +283,7 @@ func TestWriteSetCommit(t *testing.T) {
 	}
 
 	if _, err := os.ReadFile(filepath.Join(targetDir, "foo")); err == nil {
-		t.Fatalf("Expected error reading file where should not exist")
+		t.Fatal("Expected error reading file where should not exist")
 	}
 
 	if err := ws.Commit(targetDir); err != nil {
@@ -317,7 +317,7 @@ func TestWriteSetCancel(t *testing.T) {
 	}
 
 	if _, err := os.ReadFile(filepath.Join(tmpDir, "target", "foo")); err == nil {
-		t.Fatalf("Expected error reading file where should not exist")
+		t.Fatal("Expected error reading file where should not exist")
 	} else if !errors.Is(err, os.ErrNotExist) {
 		t.Fatalf("Unexpected error reading file: %s", err)
 	}

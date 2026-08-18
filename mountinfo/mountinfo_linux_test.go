@@ -699,7 +699,7 @@ func TestParseMountinfoExtraCases(t *testing.T) {
 			info, err := GetMountsFromReader(r, nil)
 			if !tc.valid {
 				if err == nil {
-					t.Errorf("expected error, got nil")
+					t.Error("expected error, got nil")
 				}
 				return
 			}

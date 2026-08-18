@@ -36,7 +36,6 @@ linters:
           arguments:
             - "preserve-scope"
         - name: unnecessary-format
-          disabled: true
         - name: unnecessary-if
         - name: unnecessary-stmt
         - name: unused-parameter

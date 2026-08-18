@@ -218,7 +218,7 @@ func TestDispatch(t *testing.T) {
 			check: func(t *testing.T, ok bool, err error) {
 				t.Helper()
 				if ok {
-					t.Errorf("expected ok=false, got true")
+					t.Error("expected ok=false, got true")
 				}
 				if err != nil {
 					t.Errorf("expected err=nil, got %v", err)
@@ -233,7 +233,7 @@ func TestDispatch(t *testing.T) {
 			check: func(t *testing.T, ok bool, err error) {
 				t.Helper()
 				if !ok {
-					t.Errorf("expected ok=true, got false")
+					t.Error("expected ok=true, got false")
 				}
 				if err != nil {
 					t.Errorf("expected err=nil, got %v", err)
@@ -250,7 +250,7 @@ func TestDispatch(t *testing.T) {
 			check: func(t *testing.T, ok bool, err error) {
 				t.Helper()
 				if !ok {
-					t.Errorf("expected ok=true, got false")
+					t.Error("expected ok=true, got false")
 				}
 				if !errors.Is(err, context.Canceled) {
 					t.Errorf("expected context.Canceled, got %v", err)
@@ -265,7 +265,7 @@ func TestDispatch(t *testing.T) {
 			check: func(t *testing.T, ok bool, err error) {
 				t.Helper()
 				if !ok {
-					t.Errorf("expected ok=true, got false")
+					t.Error("expected ok=true, got false")
 				}
 				if err != nil {
 					t.Errorf("expected err=nil, got %v", err)

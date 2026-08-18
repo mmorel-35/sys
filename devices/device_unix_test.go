@@ -113,7 +113,7 @@ func TestHostDevicesAllValid(t *testing.T) {
 		switch device.Type {
 		case config.BlockDevice, config.CharDevice:
 		case config.FifoDevice:
-			t.Logf("fifo devices shouldn't show up from HostDevices")
+			t.Log("fifo devices shouldn't show up from HostDevices")
 			fallthrough
 		default:
 			t.Errorf("device entry %+v has unexpected type %v", device, device.Type)
