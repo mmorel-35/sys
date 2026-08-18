@@ -3,6 +3,7 @@ version: "2"
 linters:
   enable:
     - errorlint
+    - revive
     - unconvert
     - unparam
   exclusions:
@@ -11,6 +12,41 @@ linters:
       - comments
       - std-error-handling
   settings:
+    revive:
+      enable-all-rules: false
+      enable-default-rules: true
+      max-open-files: 2048
+      rules:
+        - name: dot-imports
+          disabled: true
+        - name: early-return
+          arguments:
+            - "preserve-scope"
+        - name: empty-block
+          disabled: true
+        - name: if-return
+        - name: indent-error-flow
+          arguments:
+            - "preserve-scope"
+        - name: package-comments
+          disabled: true
+        - name: redefines-builtin-id
+          disabled: true
+        - name: superfluous-else
+          arguments:
+            - "preserve-scope"
+        - name: unnecessary-format
+          disabled: true
+        - name: unnecessary-if
+        - name: unnecessary-stmt
+        - name: unused-parameter
+          disabled: true
+        - name: use-errors-new
+        - name: use-fmt-print
+        - name: useless-break
+        - name: useless-fallthrough
+        - name: var-naming
+          disabled: true
     staticcheck:
       # Enable all options, with some exceptions.
       # For defaults, see https://golangci-lint.run/usage/linters/#staticcheck
