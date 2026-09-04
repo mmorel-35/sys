@@ -23,7 +23,6 @@ linters:
         - rangeValCopy
         - sloppyReassign
         - unnamedResult
-        - whyNoLint
       enable-all: true
     staticcheck:
       # Enable all options, with some exceptions.

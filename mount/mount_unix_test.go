@@ -216,7 +216,7 @@ func TestRecursiveUnmountTooGreedy(t *testing.T) {
 		if err := Mount("tmpfs", dir, "tmpfs", ""); err != nil {
 			t.Fatal(err)
 		}
-		//nolint:errcheck
+		//nolint:errcheck // Ignore error in tests
 		defer Unmount(dir)
 	}
 	// sanity check
@@ -267,7 +267,7 @@ func TestRecursiveUnmount_SubMountFailsToUnmount(t *testing.T) {
 		if err := Mount("tmpfs", dir, "tmpfs", ""); err != nil {
 			t.Fatal(err)
 		}
-		defer Unmount(dir) //nolint:errcheck
+		defer Unmount(dir) //nolint:errcheck // Ignore error in tests
 	}
 
 	// unmount shadowed mounts
