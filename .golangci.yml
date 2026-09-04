@@ -18,7 +18,6 @@ linters:
         - deferInLoop
         - hugeParam
         - importShadow
-        - paramTypeCombine
         - rangeValCopy
         - sloppyReassign
         - unnamedResult
@@ -36,3 +35,7 @@ formatters:
     - gofumpt
   exclusions:
     generated: disable
+  settings:
+    gofumpt:
+      extra:
+        group-params: true
